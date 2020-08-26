@@ -5,11 +5,11 @@ import ts from 'typescript';
 
 import {
   AngularHtmlCompiler
-} from 'meteor/angular-html-compiler';
+} from 'meteor/smardo:angular-html-compiler';
 
 import {
   AngularScssCompiler
-} from 'meteor/angular-scss-compiler';
+} from 'meteor/smardo:angular-scss-compiler';
 
 import {
   TSBuild
@@ -65,6 +65,7 @@ const ngcOptions = {
   traceResolution: false,
   skipTemplateCodegen: false,
   fullTemplateTypeCheck: true,
+  enableIvy: false,
   disableTypeScriptVersionCheck: true
 };
 

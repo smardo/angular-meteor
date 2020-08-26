@@ -2,15 +2,15 @@
 
 import {
   AngularTsCompiler
-} from 'meteor/angular-typescript-compiler';
+} from 'meteor/smardo:angular-typescript-compiler';
 
 import {
   AngularHtmlCompiler
-} from 'meteor/angular-html-compiler';
+} from 'meteor/smardo:angular-html-compiler';
 
 import {
   AngularScssCompiler
-} from 'meteor/angular-scss-compiler';
+} from 'meteor/smardo:angular-scss-compiler';
 
 let templateExtension = 'html';
 
