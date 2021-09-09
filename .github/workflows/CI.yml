@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  CI:
+    strategy:
+      matrix:
+        example: ["angularjs", "MeteorCLI/all-in-one", "MeteorCLI/bare","MeteorCLI/lazy-loading", "MeteorCLI/universal"]
+    name: CI for ${{ matrix.example }}
+    runs-on: ubuntu-latest
+    env:
+      TRAVIS_BUILD_DIR: ${{ github.workspace }}
+    steps:
+      - name: Checkout Master
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Use Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '15.x'
+      - name: Cache Meteor
+        id: cache-meteor
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.meteor
+            **/.meteor/local
+          key: ${{ runner.os }}-meteor-${{ matrix.example }}-${{ hashFiles('**/release') }}
+          restore-keys: |
+            ${{ runner.os }}-meteor-${{ matrix.example }}
+            ${{ runner.os }}-meteor-
+      - name: Use Meteor
+        if: steps.cache-meteor.outputs.cache-hit != 'true'
+        run: curl https://install.meteor.com/ | sh
+      - name: Setup Meteor
+        run: export PATH="$PATH:~/.meteor"
+      - name: Run Tests
+        run: cd examples/${{ matrix.example }} && ./run_tests.sh
+        env:
+          NODE_OPTIONS: --max-old-space-size=2048
+          METEOR_PACKAGE_DIRS: $GITHUB_WORKSPACE/atmosphere-packages
