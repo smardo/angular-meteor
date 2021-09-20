@@ -1,4 +1,4 @@
-const sass = Npm.require('node-sass');
+const sass = Npm.require('sass');
 
 const path = Npm.require('path');
 
