@@ -66,7 +66,7 @@ const ngcOptions = {
   skipTemplateCodegen: false,
   fullTemplateTypeCheck: true,
   disableTypeScriptVersionCheck: true,
-  enableIvy: false,
+  enableIvy: false
 };
 
 export class AngularTsCompiler {
