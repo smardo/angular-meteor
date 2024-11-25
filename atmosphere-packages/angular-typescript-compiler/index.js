@@ -44,20 +44,21 @@ const D_TS_REGEX = /\.ts$/;
 const WEB_ARCH_REGEX = /^web/;
 
 const ngCompilerOptions = {
-  transitiveModules: true
+  transitiveModules: true,
+  strictTemplates: true
 };
 
 const tcOptions = {
   baseUrl: basePath,
   experimentalDecorators: true,
-  module: 'commonjs',
   target: 'es2015',
+  module: 'commonjs',
   noImplicitAny: false,
   moduleResolution: 'node',
   emitDecoratorMetadata: true,
   traceResolution: false
 };
-
+console.log(tcOptions);
 const ngcOptions = {
   basePath,
   genDir: basePath,
